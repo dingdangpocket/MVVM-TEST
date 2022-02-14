@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="main"></div>
+  </body>
+  <script type="module">
+    let state = {
+      a: "子组件",
+      b: "数据",
+      arr: ["张三", "王武"],
+    };
+    function Components() {
+      return `<h5 style="color:blue">${state.a}</h5>`;
+    }
+    const ComponentsChild = Components();
+    const html = `<h1 style="color:red">${state.b}${ComponentsChild}
+      ${state.arr
+        .map((element) => {
+          return `<span>${element}&nbsp;</span>`;
+        })
+        .join("")}
+         </h1>`;
+    document.getElementById("main").innerHTML = html;
+  </script>
+</html>
