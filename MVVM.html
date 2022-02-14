@@ -6,58 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body>
-    <div id="main">
-      <div>{{name}}</div>
-      <div>{{name}}</div>
-      <div style="color: red;">{{age}}</div>
+    <div id="app">
+          <div>{{name}}</div>
+          <div>{{name}}</div>
+          <div>{{age}}</div>
     </div>
+    <div id="main">
+</div>
   </body>
-  <script src="./node_modules/babel-core/browser.min.js"></script>
   <script src="./Origin.js"></script>
-  <script type="text/ecmascript">
-    const vm=new Vue({
-        el:"#main",
-        data(){
-            return {
-                name:"张三",
-                age:19
-            }
-        }
-    })
-
-    vm.name="黄栌";
-    setTimeout(()=>{
-      vm.name="黄心";
-    },2000)
+  <script type="module">
+    const vm = new Vue({
+      el: "#app",
+      data() {
+        return {
+          name: "张三",
+          age: 19,
+          arr:[1,2,3]
+        };
+      },
+    });
+    setTimeout(() => {
+      vm.name = "黄心";
+    }, 2000);
 
     setInterval(() => {
       vm.age++
+      mount();
     },1000);
-       let state = {
-            a: "子组件",
-            b: "数据",
-            arr: [1, 2, 3, 4, 5, 6, 7],
-          };
-        // function Components() {
-        //   return `<h5 style="color:blue">${state.a}</h5>`;
-        // }
-        // const ComponentsChild = Components();
-        // mount();
-        // function mount() {
-        //   document.getElementById("main").innerHTML = App();
-        //   const el= document.getElementById("main")
-        // }
-        // function App() {
-        //   return `<div>
-        //              ${state.arr
-        //                .map((item) => {
-        //                  return `<h5 style="color:blue">${item}</h5>`;
-        //                })
-        //                .join("")}
-        //                ${ComponentsChild}
-        //                <span>hello,world!<span>
-        //          </div>`;
-        // }
+    function Components() {
+      return `<h5 style="color:blue">${vm.name}</h5>`;
+    }
+    const ComponentsChild = Components();
+    mount();
+    function mount() {
+      document.getElementById("main").innerHTML = App();
+    }
+    function App() {
+      return `<div>
+                 ${vm.arr
+                   .map((item) => {
+                     return `<h5 style="color:blue">${item}</h5>`;
+                   })
+                   .join("")}
+                   ${ComponentsChild}
+                   <span>hello,world!<span>
+             </div>`;
+    }
   </script>
 </html>
