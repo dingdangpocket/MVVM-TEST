@@ -11,10 +11,26 @@
   </body>
   <script src="./Origin.js"></script>
   <script type="module">
+    let List=[1,2,3,4,5]
+    function Components() {
+      return `<div style='color:white;background:black;padding:10px;margin:10px'>
+                 <div>子组件列表渲染</div>
+                 ${List
+                   .map((item) => {
+                     return `
+                     <div>${item}</div>`;
+                   })
+                   .join("")}
+             </div>`;
+    }
+    const child=Components()
     function App() {
-      return  `<div>{countOne}</div>
+      return  `<div>响应式数据</div>
+               <div>{countOne}</div>
                <div>{countTwo}</div>
                <div>{countThree}</div>
+               <div>${child}</div>
+               <div>${child}</div>
                `;
     }
     mount()
@@ -28,27 +44,14 @@
         };
       },
     });
-
-    // origin.countOne=111111
     setInterval(() => {
       origin.countOne++;
       origin.countTwo++;
       origin.countThree++;
     }, 1500);
-
     function mount(){
       const components=App()
       document.getElementById("app").innerHTML= components
     }
-    // function App() {
-    //   return `<div>
-    //              ${origin.arr
-    //                .map((item) => {
-    //                  return `<h5 style="color:blue">${item}</h5>`;
-    //                })
-    //                .join("")}
-    //                ${ComponentsChild}
-    //          </div>`;
-    // }
   </script>
 </html>

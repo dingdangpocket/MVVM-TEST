@@ -46,10 +46,10 @@ class Origin {
     Object.defineProperty(this, key, {
       //调用监听定义属性的方法,把key定义到这个代理身上去;
       get() {
-        return this.$data[key]; //当这个key被访问时,我们返回那个传入的对象的属性;
+        return this.$data[key]; //当这个key被访问时,返回那个传入的对象的属性;
       },
       set(newValue) {
-        this.$data[key] = newValue; //当这个key被修改时,我们那个修改的值,赋值给$data中对应的数据;
+        this.$data[key] = newValue; //当这个key被修改时,那个修改的值,赋值给$data中对应的数据;
       },
     });
   }
@@ -82,7 +82,7 @@ class Compiler {
         const key = RegExp.$1.trim(); //拿到里面的字符串,也就是对象的属性名;
         const render = () => {
           // console.log("HTML-DOM-TEXT-元素", OLD_AST_DOM_TREE_HTML);
-          item.innerText = this.data[key]; //做渲染,也就是会触发set方法;
+          item.innerText = this.data[key]; //做渲染,会触发set方法;
           const OLD_AST_DOM_TREE_HTML = nodeToString(this.el);
           const AST = ASTDEAL(
             OLD_AST_DOM_TREE_HTML,
@@ -182,11 +182,11 @@ function ASTDEAL(HTML, RPScountOne, RPScountTwo, RPScountThree) {
 
     function end(tagName) {
       let element = stack.pop(); // 拿到的是ast对象
-      // 我要标识当前这个p是属于这个div的儿子的
+      //标识当前这个p是属于这个div的儿子的
       currentParent = stack[stack.length - 1];
       if (currentParent) {
         element.parent = currentParent;
-        currentParent.children.push(element); // 实现了一个树的父子关系
+        currentParent.children.push(element); // 实现一个树的父子关系
       }
     }
     // 不停的去解析html字符串
