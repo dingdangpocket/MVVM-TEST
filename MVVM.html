@@ -7,51 +7,48 @@
     <title>Document</title>
   </head>
     <div id="app">
-          <div>{{name}}</div>
-          <div>{{name}}</div>
-          <div>{{age}}</div>
     </div>
-    <div id="main">
-</div>
   </body>
   <script src="./Origin.js"></script>
   <script type="module">
-    const vm = new Vue({
+    function App() {
+      return  `<div>{countOne}</div>
+               <div>{countTwo}</div>
+               <div>{countThree}</div>
+               `;
+    }
+    mount()
+    const origin= new Origin({
       el: "#app",
       data() {
         return {
-          name: "张三",
-          age: 19,
-          arr:[1,2,3]
+          countOne: 100,
+          countTwo: 1000,
+          countThree:10000
         };
       },
     });
-    setTimeout(() => {
-      vm.name = "黄心";
-    }, 2000);
 
+    // origin.countOne=111111
     setInterval(() => {
-      vm.age++
-      mount();
-    },1000);
-    function Components() {
-      return `<h5 style="color:blue">${vm.name}</h5>`;
+      origin.countOne++;
+      origin.countTwo++;
+      origin.countThree++;
+    }, 1500);
+
+    function mount(){
+      const components=App()
+      document.getElementById("app").innerHTML= components
     }
-    const ComponentsChild = Components();
-    mount();
-    function mount() {
-      document.getElementById("main").innerHTML = App();
-    }
-    function App() {
-      return `<div>
-                 ${vm.arr
-                   .map((item) => {
-                     return `<h5 style="color:blue">${item}</h5>`;
-                   })
-                   .join("")}
-                   ${ComponentsChild}
-                   <span>hello,world!<span>
-             </div>`;
-    }
+    // function App() {
+    //   return `<div>
+    //              ${origin.arr
+    //                .map((item) => {
+    //                  return `<h5 style="color:blue">${item}</h5>`;
+    //                })
+    //                .join("")}
+    //                ${ComponentsChild}
+    //          </div>`;
+    // }
   </script>
 </html>
