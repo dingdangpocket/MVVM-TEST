@@ -25,10 +25,14 @@
     }
     const child=Components()
     function App() {
-      return  `<div>响应式数据</div>
-               <div>{countOne}</div>
+      return  `<div>{countOne}</div>
                <div>{countTwo}</div>
                <div>{countThree}</div>
+               <div style="color:red;background:black">
+                  子元素
+                  <div>{countOne}</div>
+                  <div>{countTwo}</div>
+               </div>
                <div>${child}</div>
                <div>${child}</div>
                `;
